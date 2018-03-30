@@ -1,37 +1,114 @@
-## Welcome to GitHub Pages
+<div dir="ltr" style="text-align: left;" trbidi="on">
+<div dir="ltr" style="text-align: left;" trbidi="on">
+<br /></div>
+<html>
+</html>
+<head></div>
+<div class="container">
+ <div class=" clearfix">
+  <div class="calc col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+    <h2>Love Calculator</h2>
+    <h5>Enter Two Peoples Names to Calculate The Love....</h5>
+    <form role="form" class="form-horizontal">
+      <div class="form-group">
+        <input type="text" class="form-control" name="names" placeholder="Name One" />
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" name="names" placeholder="Name Two" />
+      </div>
+      <div class="form-group">
+        <button class="btn btn-danger pull-right" type="submit" id="submit">Calculate</button>
+      </div>
+    </form>
+    <p id="warning" class="text-danger"></p>
+    <h1 id="result" class="text-center"></h1>
+    <p><em><b><i>By- <b>sagar</b></i></em></p>
+  </div>
+ </div>
+</div>
+ <script type="text/javascript">   
 
-You can use the [editor on GitHub](https://github.com/sagar16091997/techemotion/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+    </script>
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+    <style type="text/css">
+.calc {
+ margin-top: 50px;
+ margin-bottom: 50px;
+ padding:20px 50px;
+ border:5px solid #AB6C6C;
+ background-color: #BB9898;
+ clear: both;
+}
+#result {
+ color: rgb(202, 58, 58);
+  font-size: 85px;
+  text-shadow: 1px 1px 1px #646161;
+ height: 150px;
+}
+</style>
 
-### Markdown
+</head>
+<body>
+<script type="text/javascript">
+function love(array) {
+  var hold = [],
+    result,
+    newArray;
+  if (array.length > 2) {
+    newArray = array.map(function(item, index, array) {
+      return item + array[index + 1];
+    });
+    newArray.forEach(function(item) {
+      if (typeof item === "number" && !isNaN(item)) {
+        if (item < 10) {
+          hold.push(item);
+        } else if (item > 9) {
+          console.log('Splitting' + item + " into " + item.toString()[0] + " and " + item.toString()[1]);
+          hold.push(parseInt(item.toString()[0]));
+          hold.push(parseInt(item.toString()[1]));
+        }
+      } else {
+        console.log("failed number check: " + item);
+      }
+    });
+    love(hold);
+  } else {
+    document.getElementById('result').textContent = array[0] + "" + array[1] + "%";
+    result = array[0] + "" + array[1] + "%";
+    return result;
+  }
+}
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+function calculate() {
+  var inputs = document.getElementsByName('names'),
+    loves = ["l", "o", "v", "e", "s"],
+    countArray = [],
+    count,
+    names,
+    jointNames;
+  document.getElementById('warning').textContent = "";
+  if (!inputs[0].value || !inputs[1].value) {
+    document.getElementById('warning').textContent = "Please enter both names.";
+  } else {
+    names = "" + inputs[0].value + "" + inputs[1].value + "";
+    jointNames = names.toLowerCase();
+    countArray = loves.map(function(item) {
+      count = 0;
+      for (var i = 0; i < jointNames.length; i += 1) {
+        if (item === jointNames[i]) {
+          count += 1;
+        }
+      }
+      return count;
+    });
+    love(countArray);
+  }
+}
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/sagar16091997/techemotion/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+document.getElementById('submit').addEventListener('click', function(e) {
+  e.preventDefault();
+  calculate();
+}, false);
+</script>
+</body>
+</html>
